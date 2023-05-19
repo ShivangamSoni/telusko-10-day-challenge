@@ -61,8 +61,9 @@ But in order to Participate in the Giveaway following needs to be done:
 
 ### My Solutions:
 
-| #   | Topic/Concept | Solution |
-| --- | ------------- | -------- |
+| #     | Topic/Concept           | Solution               |
+| ----- | ----------------------- | ---------------------- |
+| Day 1 | Recursion & Memoization | [My Solution](./day-1) |
 
 ## Author
 
