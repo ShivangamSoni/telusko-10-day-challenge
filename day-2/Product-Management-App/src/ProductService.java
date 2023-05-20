@@ -14,7 +14,7 @@ public class ProductService {
 
     public Product getProduct(String name) {
         for(Product p : products) {
-            if(p.getName().toLowerCase().equals(name.toLowerCase())) {
+            if(p.getName().equalsIgnoreCase(name.toLowerCase())) {
                 return p;
             }
         }
@@ -29,6 +29,16 @@ public class ProductService {
             String type = p.getType().toLowerCase();
             String place = p.getPlace().toLowerCase();
             if(name.contains(textLower) || type.contains(textLower) || place.contains(textLower)) {
+                prods.add(p);
+            }
+        }
+        return prods;
+    }
+
+    public List<Product> getProductsByPlace(String place) {
+        List<Product> prods = new ArrayList<Product>();
+        for(Product p : products) {
+            if(p.getPlace().equalsIgnoreCase(place.toLowerCase())) {
                 prods.add(p);
             }
         }
