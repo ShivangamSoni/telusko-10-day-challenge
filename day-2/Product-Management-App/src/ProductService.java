@@ -1,3 +1,4 @@
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,17 @@ public class ProductService {
         List<Product> prods = new ArrayList<Product>();
         for(Product p : products) {
             if(p.getPlace().equalsIgnoreCase(place.toLowerCase())) {
+                prods.add(p);
+            }
+        }
+        return prods;
+    }
+
+    public List<Product> getExpiredWarrantyProducts() {
+        List<Product> prods = new ArrayList<Product>();
+        int currentYear = Year.now().getValue();
+        for(Product p : products) {
+            if(p.getWarranty() < currentYear) {
                 prods.add(p);
             }
         }
