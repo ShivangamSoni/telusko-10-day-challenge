@@ -14,46 +14,31 @@ public class ProductService {
     }
 
     public Product getProduct(String name) {
-        for(Product p : products) {
-            if(p.getName().equalsIgnoreCase(name.toLowerCase())) {
-                return p;
-            }
-        }
-        return null;
+        return products.stream()
+                .filter(p -> p.getName().equalsIgnoreCase(name.toLowerCase()))
+                .findFirst()
+                .orElse(null);
     }
 
     public List<Product> getProductsWithText(String text) {
         String textLower = text.toLowerCase();
-        List<Product> prods = new ArrayList<Product>();
-        for(Product p : products) {
-            String name = p.getName().toLowerCase();
-            String type = p.getType().toLowerCase();
-            String place = p.getPlace().toLowerCase();
-            if(name.contains(textLower) || type.contains(textLower) || place.contains(textLower)) {
-                prods.add(p);
-            }
-        }
-        return prods;
+        return products.stream()
+                .filter(p -> p.getName().toLowerCase().contains(textLower) ||
+                        p.getType().toLowerCase().contains(textLower) ||
+                        p.getPlace().toLowerCase().contains(textLower))
+                .toList();
     }
 
     public List<Product> getProductsByPlace(String place) {
-        List<Product> prods = new ArrayList<Product>();
-        for(Product p : products) {
-            if(p.getPlace().equalsIgnoreCase(place.toLowerCase())) {
-                prods.add(p);
-            }
-        }
-        return prods;
+        return products.stream()
+                .filter(p -> p.getPlace().equalsIgnoreCase(place.toLowerCase()))
+                .toList();
     }
 
     public List<Product> getExpiredWarrantyProducts() {
-        List<Product> prods = new ArrayList<Product>();
         int currentYear = Year.now().getValue();
-        for(Product p : products) {
-            if(p.getWarranty() < currentYear) {
-                prods.add(p);
-            }
-        }
-        return prods;
+        return products.stream()
+                .filter(p -> p.getWarranty() < currentYear)
+                .toList();
     }
 }
