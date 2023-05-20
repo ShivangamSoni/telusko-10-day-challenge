@@ -44,12 +44,12 @@ const generatePascalsTriangle = (function () {
       }
     }
     triangle.push(row);
-    // Save in Cache
-    cache.set(height, triangle);
+    // Save in Cache, Needs to be destructured otherwise only Reference if Stored
+    cache.set(height, [...triangle]);
 
     return triangle;
   };
 })();
 
-const res = generatePascalsTriangle(5000);
+const res = generatePascalsTriangle(5);
 console.log(res);
