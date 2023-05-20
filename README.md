@@ -58,12 +58,14 @@ But in order to Participate in the Giveaway following needs to be done:
 ### Built with
 
 - JavaScript
+- Java
 
 ### My Solutions:
 
-| #     | Topic/Concept           | Solution               |
-| ----- | ----------------------- | ---------------------- |
-| Day 1 | Recursion & Memoization | [My Solution](./day-1) |
+| #     | Topic/Concept           | Solution               | Done using |
+| ----- | ----------------------- | ---------------------- | ---------- |
+| Day 1 | Recursion & Memoization | [My Solution](./day-1) | JavaScript |
+| Day 2 | Product Management App  | [My Solution](./day-2) | Java       |
 
 ## Author
 
