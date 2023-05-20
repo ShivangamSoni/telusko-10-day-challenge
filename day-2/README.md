@@ -48,15 +48,25 @@ Add following Features:
 I Created a method `getProductsByPlace` within the `ProductService` that takes a
 String `place` as an Argument.
 
+**Simple Solution:**
+
 1. Initializing `prods` with an empty List or Type Products
 2. Loop over the `products` List & compare each Products Place with input
    `place`.
    1. If matches, add product to `prods`
 3. Return `prods`
 
+**Using Stream API:**
+
+1. Creating a Stream from `products` using Collections `Stream API`
+2. Using Filter Method to filter the `products` based on `place`
+3. Converting the Filters output Stream into a List & returning it.
+
 #### Get Products whose Warranty is Expired
 
 I Created a method `getExpiredWarrantyProducts` within the `ProductService`.
+
+**Simple Solution:**
 
 1. Initializing `prods` with an empty List or Type Products
 2. Initializing `currentYear` with current Years Value using
@@ -65,6 +75,14 @@ I Created a method `getExpiredWarrantyProducts` within the `ProductService`.
    `currentYear`.
    1. If `warranty` is less than `currentYear`, add product to `prods`
 4. Return `prods`
+
+**Using Stream API:**
+
+1. Initializing `currentYear` with current Years Value using
+2. Creating a Stream from `products` using Collections `Stream API`
+3. Using Filter Method to filter the `products` based on `warranty` &
+   `currentYear`
+4. Converting the Filters output Stream into a List & returning it.
 
 ## Article
 
