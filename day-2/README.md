@@ -86,4 +86,4 @@ I Created a method `getExpiredWarrantyProducts` within the `ProductService`.
 
 ## Article
 
-[LinkedIn]()
+[LinkedIn](https://www.linkedin.com/pulse/java-stream-api-functional-interface-shivangam-soni)
