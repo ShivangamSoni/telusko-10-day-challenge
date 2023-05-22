@@ -9,14 +9,12 @@ import java.util.List;
 
 @Repository
 public interface ProductDB extends JpaRepository<Product, Integer> {
-    @Query("SELECT p from Product p WHERE LOWER(p.name) = LOWER(:name)")
-    Product findByName(@Param("name") String name);
+    Product findByNameIgnoreCase(String name);
 
     @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.type) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.place) LIKE LOWER(concat('%', :text, '%'))")
     List<Product> findAllByText(@Param("text") String text);
 
-    @Query("SELECT p from Product p WHERE LOWER(p.place) = LOWER(:place)")
-    List<Product> findAllByPlace(@Param("place") String place);
+    List<Product> findAllByPlaceIgnoreCase(String place);
 
     List<Product> findAllByWarrantyLessThan(int currentYear);
 }

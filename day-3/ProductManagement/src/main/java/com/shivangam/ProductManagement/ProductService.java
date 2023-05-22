@@ -20,7 +20,7 @@ public class ProductService {
     }
 
     public Product getProduct(String name) {
-        return db.findByName(name);
+        return db.findByNameIgnoreCase(name);
     }
 
     public List<Product> getProductsWithText(String text) {
@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsByPlace(String place) {
-        return db.findAllByPlace(place);
+        return db.findAllByPlaceIgnoreCase(place);
     }
 
     public List<Product> getExpiredWarrantyProducts() {
