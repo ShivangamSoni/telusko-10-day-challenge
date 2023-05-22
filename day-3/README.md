@@ -9,7 +9,11 @@ This is my solution to the Day 3 Challenge.
   - [Code](#code)
 - [My Process](#my-process)
   - [Understanding the Problem](#understanding-the-problem)
-  - [Code Explanations](#code-explanation)
+  - [Code Explanations](#code-explanations)
+    - [Get Product by Name](#get-product-by-name)
+    - [Get Products by Place](#get-products-by-place)
+    - [Get Products by Text](#get-products-by-text)
+    - [Get Products whose Warranty is Expired](#get-products-whose-warranty-is-expired)
 - [Article](#article)
 
 ## Overview
@@ -36,7 +40,7 @@ I need to implement the Following Functionality using Spring Data JPA
 - Get Products By Text
 - Get Products whose Warranty is Expired
 
-### Solution Explanations
+### Code Explanations
 
 #### Get Product by Name
 
@@ -96,11 +100,9 @@ I created the method `getExpiredWarrantyProducts` within `Product Service`.
 `getExpiredWarrantyProducts` is utilizing the `ProductDB` JPA Repository to get
 the Data.
 
-**Advanced Approach**
-
 1.  Declare a method in `ProductDB` called `findAllByWarrantyLessThan` that
     takes in an int `currentYear`
 
 ## Article
 
-[LinkedIn]()
+[LinkedIn](https://www.linkedin.com/pulse/spring-data-jpa-shivangam-soni)
