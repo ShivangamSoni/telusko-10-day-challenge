@@ -24,7 +24,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsWithText(String text) {
-        return db.findByText(text);
+        return db.findAllByText(text);
     }
 
     public List<Product> getProductsByPlace(String place) {

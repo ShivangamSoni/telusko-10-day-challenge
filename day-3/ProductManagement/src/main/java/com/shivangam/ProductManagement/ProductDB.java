@@ -13,5 +13,5 @@ public interface ProductDB extends JpaRepository<Product, Integer> {
     Product findByName(@Param("name") String name);
 
     @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.type) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.place) LIKE LOWER(concat('%', :text, '%'))")
-    List<Product> findByText(@Param("text") String text);
+    List<Product> findAllByText(@Param("text") String text);
 }
