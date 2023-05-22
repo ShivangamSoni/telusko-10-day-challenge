@@ -33,6 +33,6 @@ public class ProductService {
 
     public List<Product> getExpiredWarrantyProducts() {
         int currentYear = Year.now().getValue();
-        return null;
+        return db.findAllByWarrantyLessThan(currentYear);
     }
 }

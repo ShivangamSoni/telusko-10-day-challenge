@@ -17,4 +17,6 @@ public interface ProductDB extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p from Product p WHERE LOWER(p.place) = LOWER(:place)")
     List<Product> findAllByPlace(@Param("place") String place);
+
+    List<Product> findAllByWarrantyLessThan(int currentYear);
 }

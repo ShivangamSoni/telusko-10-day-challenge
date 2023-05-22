@@ -54,10 +54,10 @@ public class ProductManagementApplication {
 		products.forEach(System.out::println);
 		System.out.println("=======================================");
 
-//		System.out.println("Get all Products whose Warranty is Expired");
-//		products = service.getExpiredWarrantyProducts();
-//		products.forEach(System.out::println);
-//		System.out.println("=======================================");
+		System.out.println("Get all Products whose Warranty is Expired");
+		products = service.getExpiredWarrantyProducts();
+		products.forEach(System.out::println);
+		System.out.println("=======================================");
 	}
 
 }
