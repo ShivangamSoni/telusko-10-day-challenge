@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsByPlace(String place) {
-        return null;
+        return db.findAllByPlace(place);
     }
 
     public List<Product> getExpiredWarrantyProducts() {
