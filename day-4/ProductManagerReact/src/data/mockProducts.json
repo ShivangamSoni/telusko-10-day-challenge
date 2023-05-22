@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Pen",
+    "type": "Stationary",
+    "place": "Bedroom Table",
+    "warranty": 9999
+  },
+  {
+    "id": 2,
+    "name": "HP Omen 15",
+    "type": "Laptop",
+    "place": "Study Table",
+    "warranty": 9999
+  },
+  {
+    "id": 3,
+    "name": "Oneplus Z2",
+    "type": "Headphone",
+    "place": "Bedroom",
+    "warranty": 2009
+  }
+]
