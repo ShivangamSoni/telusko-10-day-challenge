@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Year;
-import java.util.List;
 
 import com.shivangam.ProductManager.model.Product;
 import com.shivangam.ProductManager.repository.ProductRepository;
@@ -32,8 +31,8 @@ public class ProductService {
         return repository.findAllByText(text, pageable);
     }
 
-    public List<Product> getProductsByPlace(String place) {
-        return repository.findAllByPlaceIgnoreCase(place);
+    public Page<Product> getProductsByPlace(String place, Pageable pageable) {
+        return repository.findAllByPlaceIgnoreCase(place, pageable);
     }
 
     public Page<Product> getExpiredWarrantyProducts(Pageable pageable) {

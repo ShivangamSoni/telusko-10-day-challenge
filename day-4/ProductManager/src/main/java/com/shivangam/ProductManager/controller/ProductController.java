@@ -28,6 +28,11 @@ public class ProductController {
         return service.getExpiredWarrantyProducts(pageable);
     }
 
+    @GetMapping("/products/place/{place}")
+    public Page<Product> getAllByPlace(@PathVariable String place, Pageable pageable) {
+        return service.getProductsByPlace(place, pageable);
+    }
+
     @GetMapping("/product/{name}")
     public Product getProductByName(@PathVariable String name) {
         return service.getProduct(name);
@@ -37,5 +42,4 @@ public class ProductController {
     public void addProduct(@RequestBody Product p) {
         service.addProduct(p);
     }
-
 }

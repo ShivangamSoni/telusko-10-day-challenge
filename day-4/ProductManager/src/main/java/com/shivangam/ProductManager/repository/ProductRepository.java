@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 import com.shivangam.ProductManager.model.Product;
 
 @Repository
@@ -18,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.type) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.place) LIKE LOWER(concat('%', :text, '%'))")
     Page<Product> findAllByText(@Param("text") String text, Pageable pageable);
 
-    List<Product> findAllByPlaceIgnoreCase(String place);
+    Page<Product> findAllByPlaceIgnoreCase(String place, Pageable pageable);
 
     Page<Product> findAllByWarrantyLessThan(int currentYear, Pageable pageable);
 }
