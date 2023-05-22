@@ -1,6 +1,8 @@
 package com.shivangam.ProductManager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Year;
@@ -18,8 +20,8 @@ public class ProductService {
         repository.save(product);
     }
 
-    public List<Product> getAllProducts() {
-        return repository.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Product getProduct(String name) {

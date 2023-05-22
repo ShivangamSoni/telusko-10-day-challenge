@@ -2,11 +2,11 @@ package com.shivangam.ProductManager.controller;
 
 import com.shivangam.ProductManager.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import com.shivangam.ProductManager.service.ProductService;
-
-import java.util.List;
 
 @RestController
 public class ProductController {
@@ -14,8 +14,8 @@ public class ProductController {
     ProductService service;
 
     @GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return service.getAllProducts();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return service.getAllProducts(pageable);
     }
 
     @GetMapping("/product/{name}")
