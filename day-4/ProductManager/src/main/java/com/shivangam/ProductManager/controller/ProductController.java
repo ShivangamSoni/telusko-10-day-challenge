@@ -18,6 +18,11 @@ public class ProductController {
         return service.getAllProducts(pageable);
     }
 
+    @GetMapping("/products/search")
+    public Page<Product> getAllByText(@RequestParam("q") String text, Pageable pageable) {
+        return service.getProductsWithText(text, pageable);
+    }
+
     @GetMapping("/product/{name}")
     public Product getProductByName(@PathVariable String name) {
         return service.getProduct(name);
@@ -27,4 +32,5 @@ public class ProductController {
     public void addProduct(@RequestBody Product p) {
         service.addProduct(p);
     }
+
 }

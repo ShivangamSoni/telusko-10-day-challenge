@@ -28,8 +28,8 @@ public class ProductService {
         return repository.findByNameIgnoreCase(name);
     }
 
-    public List<Product> getProductsWithText(String text) {
-        return repository.findAllByText(text);
+    public Page<Product> getProductsWithText(String text, Pageable pageable) {
+        return repository.findAllByText(text, pageable);
     }
 
     public List<Product> getProductsByPlace(String place) {

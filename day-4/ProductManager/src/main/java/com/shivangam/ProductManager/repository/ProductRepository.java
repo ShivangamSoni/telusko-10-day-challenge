@@ -1,5 +1,6 @@
 package com.shivangam.ProductManager.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findByNameIgnoreCase(String name);
 
     @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.type) LIKE LOWER(concat('%', :text, '%')) OR LOWER(p.place) LIKE LOWER(concat('%', :text, '%'))")
-    List<Product> findAllByText(@Param("text") String text);
+    Page<Product> findAllByText(@Param("text") String text, Pageable pageable);
 
     List<Product> findAllByPlaceIgnoreCase(String place);
 
