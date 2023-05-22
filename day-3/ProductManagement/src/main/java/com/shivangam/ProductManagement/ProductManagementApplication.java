@@ -38,6 +38,26 @@ public class ProductManagementApplication {
 		List<Product> products = service.getAllProducts();
 		products.forEach(System.out::println);
 		System.out.println("-----------------------------------------------");
+
+		System.out.println("Get a Particular Product by Name");
+		Product prod = service.getProduct("type c");
+		System.out.println(prod);
+		System.out.println("=======================================");
+
+//		System.out.println("Get all Products based on Text");
+//		products = service.getProductsWithText("Black");
+//		products.forEach(System.out::println);
+//		System.out.println("=======================================");
+
+//		System.out.println("Get all Products by Place");
+//		products = service.getProductsByPlace("white Table");
+//		products.forEach(System.out::println);
+//		System.out.println("=======================================");
+
+//		System.out.println("Get all Products whose Warranty is Expired");
+//		products = service.getExpiredWarrantyProducts();
+//		products.forEach(System.out::println);
+//		System.out.println("=======================================");
 	}
 
 }

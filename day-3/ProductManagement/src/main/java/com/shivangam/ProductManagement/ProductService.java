@@ -20,7 +20,7 @@ public class ProductService {
     }
 
     public Product getProduct(String name) {
-        return null;
+        return db.findByName(name);
     }
 
     public List<Product> getProductsWithText(String text) {
