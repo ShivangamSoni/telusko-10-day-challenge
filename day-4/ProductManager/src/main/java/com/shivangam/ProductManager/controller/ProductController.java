@@ -23,6 +23,11 @@ public class ProductController {
         return service.getProductsWithText(text, pageable);
     }
 
+    @GetMapping("/products/expired")
+    public Page<Product> getAllExpired(Pageable pageable) {
+        return service.getExpiredWarrantyProducts(pageable);
+    }
+
     @GetMapping("/product/{name}")
     public Product getProductByName(@PathVariable String name) {
         return service.getProduct(name);

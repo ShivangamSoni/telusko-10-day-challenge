@@ -36,8 +36,8 @@ public class ProductService {
         return repository.findAllByPlaceIgnoreCase(place);
     }
 
-    public List<Product> getExpiredWarrantyProducts() {
+    public Page<Product> getExpiredWarrantyProducts(Pageable pageable) {
         int currentYear = Year.now().getValue();
-        return repository.findAllByWarrantyLessThan(currentYear);
+        return repository.findAllByWarrantyLessThan(currentYear, pageable);
     }
 }

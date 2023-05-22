@@ -20,5 +20,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findAllByPlaceIgnoreCase(String place);
 
-    List<Product> findAllByWarrantyLessThan(int currentYear);
+    Page<Product> findAllByWarrantyLessThan(int currentYear, Pageable pageable);
 }
