@@ -44,10 +44,10 @@ public class ProductManagementApplication {
 		System.out.println(prod);
 		System.out.println("=======================================");
 
-//		System.out.println("Get all Products based on Text");
-//		products = service.getProductsWithText("Black");
-//		products.forEach(System.out::println);
-//		System.out.println("=======================================");
+		System.out.println("Get all Products based on Text");
+		products = service.getProductsWithText("Black");
+		products.forEach(System.out::println);
+		System.out.println("=======================================");
 
 //		System.out.println("Get all Products by Place");
 //		products = service.getProductsByPlace("white Table");

@@ -24,8 +24,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsWithText(String text) {
-        String textLower = text.toLowerCase();
-        return null;
+        return db.findByText(text);
     }
 
     public List<Product> getProductsByPlace(String place) {
