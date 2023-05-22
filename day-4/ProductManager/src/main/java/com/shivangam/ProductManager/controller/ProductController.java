@@ -4,9 +4,13 @@ import com.shivangam.ProductManager.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.shivangam.ProductManager.service.ProductService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -39,7 +43,10 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public void addProduct(@RequestBody Product p) {
+    public @ResponseBody ResponseEntity<Map<String, Object>> addProduct(@RequestBody Product p) {
         service.addProduct(p);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Product Created Successfully");
+        return ResponseEntity.ok(response);
     }
 }
