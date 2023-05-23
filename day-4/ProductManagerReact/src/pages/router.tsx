@@ -4,6 +4,7 @@ import RootLayout from '@features/site/RootLayout';
 import Home from './Home';
 import Expired from './Expired';
 import ProductDetails from './ProductDetails';
+import Search from './Search';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: '/products/:name',
         element: <ProductDetails />,
+      },
+      {
+        path: '/products/search',
+        element: <Search />,
       },
     ],
   },

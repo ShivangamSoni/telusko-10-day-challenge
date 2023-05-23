@@ -11,6 +11,7 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const FormSchema = object({
   search: string().required("Whoops, can't be empty"),
@@ -18,6 +19,7 @@ const FormSchema = object({
 type FormState = InferType<typeof FormSchema>;
 
 export default function SearchBar() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,7 +29,9 @@ export default function SearchBar() {
   });
 
   function submitHandler({ search }: FormState) {
-    console.log(search);
+    const queryParams = new URLSearchParams();
+    queryParams.append('q', search);
+    navigate(`/products/search?${queryParams.toString()}`);
   }
 
   return (
