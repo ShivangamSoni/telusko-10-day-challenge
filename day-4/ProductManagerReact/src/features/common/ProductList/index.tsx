@@ -2,7 +2,7 @@ import { Flex, Grid } from '@chakra-ui/react';
 
 import { Product } from '@customTypes/Product';
 
-import ProductListingCard from './ProductListingCard';
+import ProductListingCard from '../ProductListingCard';
 
 export default function ProductList({ products }: { products: Product[] }) {
   return (
