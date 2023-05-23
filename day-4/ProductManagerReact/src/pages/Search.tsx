@@ -7,9 +7,11 @@ import { Box, Grid, Heading, Text } from '@chakra-ui/react';
 import { ProductResponse } from '@customTypes/ProductResponse';
 import searchProducts from '@api/searchProducts';
 
+import usePagination from '@hooks/usePagination';
+
+import ProductListSkeleton from '@features/common/ProductList/Skeleton';
 import ProductList from '@features/common/ProductList';
 import Pagination from '@features/common/Pagination';
-import usePagination from '@hooks/usePagination';
 
 export default function Search() {
   const q = useSearchParams()[0].get('q');
@@ -34,11 +36,6 @@ export default function Search() {
       query.isActive() && error?.response?.status !== 404,
   });
 
-  if (isLoading || isFetching || isRefetching) {
-    // TODO: Add a Proper loading Indicator
-    return <>Loading...</>;
-  }
-
   return (
     <Grid
       h={'full'}
@@ -47,6 +44,9 @@ export default function Search() {
       gap={2}
     >
       <Heading>Search Term: `{q}`</Heading>
+
+      {(isLoading || isFetching || isRefetching) && <ProductListSkeleton />}
+
       {data && data.content && data.content.length > 0 ? (
         <>
           <ProductList products={data.content} highlight={q as string} />

@@ -7,6 +7,7 @@ import getProductById from '@api/getProductById';
 
 import ProductDetailsCard from '@features/common/ProductDetailsCard';
 import deleteProduct from '@api/deleteProduct';
+import ProductDetailsCardSkeleton from '@features/common/ProductDetailsCard/Skeleton';
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -44,16 +45,13 @@ export default function ProductDetails() {
     },
   });
 
-  if (isLoading || isFetching || isRefetching) {
-    // TODO: Add a Proper loading Indicator
-    return <>Loading...</>;
-  }
-
   console.log(data);
 
   return (
     <>
-      {data && data != null ? (
+      {isLoading || isFetching || isRefetching ? (
+        <ProductDetailsCardSkeleton />
+      ) : data && data != null ? (
         <ProductDetailsCard product={data} onDelete={(id) => mutateAsync(id)} />
       ) : (
         <Navigate to={'/404'} />

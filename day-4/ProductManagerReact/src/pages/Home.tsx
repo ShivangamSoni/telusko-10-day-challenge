@@ -8,6 +8,7 @@ import getAllProducts from '@api/getAllProducts';
 
 import usePagination from '@hooks/usePagination';
 
+import ProductListSkeleton from '@features/common/ProductList/Skeleton';
 import ProductList from '@features/common/ProductList';
 import Pagination from '@features/common/Pagination';
 
@@ -32,11 +33,6 @@ export default function Home() {
       query.isActive() && error?.response?.status !== 404,
   });
 
-  if (isLoading || isFetching || isRefetching) {
-    // TODO: Add a Proper loading Indicator
-    return <>Loading...</>;
-  }
-
   return (
     <Grid
       h={'full'}
@@ -45,6 +41,9 @@ export default function Home() {
       gap={2}
     >
       <Heading textTransform={'uppercase'}>All Products</Heading>
+
+      {(isLoading || isFetching || isRefetching) && <ProductListSkeleton />}
+
       {data && data.content && data.content.length > 0 ? (
         <>
           <ProductList products={data.content} />

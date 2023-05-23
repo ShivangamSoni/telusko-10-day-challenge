@@ -9,6 +9,7 @@ import getProductsByPlace from '@api/getProductsByPlace';
 
 import usePagination from '@hooks/usePagination';
 
+import ProductListSkeleton from '@features/common/ProductList/Skeleton';
 import ProductList from '@features/common/ProductList';
 import Pagination from '@features/common/Pagination';
 
@@ -35,11 +36,6 @@ export default function Place() {
       query.isActive() && error?.response?.status !== 404,
   });
 
-  if (isLoading || isFetching || isRefetching) {
-    // TODO: Add a Proper loading Indicator
-    return <>Loading...</>;
-  }
-
   return (
     <Grid
       h={'full'}
@@ -48,6 +44,9 @@ export default function Place() {
       gap={2}
     >
       <Heading>All Products at: {place}</Heading>
+
+      {(isLoading || isFetching || isRefetching) && <ProductListSkeleton />}
+
       {data && data.content && data.content.length > 0 ? (
         <>
           <ProductList products={data.content} />
