@@ -27,6 +27,10 @@ public class ProductService {
         return repository.findByNameIgnoreCase(name);
     }
 
+    public Product getProductById(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public Page<Product> getProductsWithText(String text, Pageable pageable) {
         return repository.findAllByText(text, pageable);
     }

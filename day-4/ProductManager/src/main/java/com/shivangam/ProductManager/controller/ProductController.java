@@ -37,9 +37,9 @@ public class ProductController {
         return service.getProductsByPlace(place, pageable);
     }
 
-    @GetMapping("/product/{name}")
-    public Product getProductByName(@PathVariable String name) {
-        return service.getProduct(name);
+    @GetMapping("/product/{id}")
+    public Product getProductById(@PathVariable int id) {
+        return service.getProductById(id);
     }
 
     @PostMapping("/product")
