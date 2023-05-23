@@ -10,17 +10,28 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 import NavLink from '@components/NavLink';
+import SearchBar from './SearchBar';
 
-const Links = ['Products', 'Add Product', 'Expired Products'];
+const Links = [
+  { to: '/', label: 'Products' },
+  { to: '/products/add', label: 'Add Product' },
+  { to: '/products/expired', label: 'Expired Products' },
+];
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const NavLinks = Links.map(({ to, label }) => (
+    <NavLink key={to} to={to}>
+      {label}
+    </NavLink>
+  ));
   return (
     <Box
       as="header"
       bg={useColorModeValue('gray.100', 'gray.900')}
       px={4}
+      pb={4}
       mb={10}
     >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
@@ -39,11 +50,7 @@ export default function Header() {
         >
           <Box>Product Manager</Box>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-            {Links.map((link) => (
-              <NavLink key={link} to="/">
-                {link}
-              </NavLink>
-            ))}
+            {NavLinks}
           </HStack>
         </HStack>
       </Flex>
@@ -51,14 +58,12 @@ export default function Header() {
       {isOpen ? (
         <Box pb={4} display={{ md: 'none' }}>
           <Stack as={'nav'} spacing={4}>
-            {Links.map((link) => (
-              <NavLink key={link} to="/">
-                {link}
-              </NavLink>
-            ))}
+            {NavLinks}
           </Stack>
         </Box>
       ) : null}
+
+      <SearchBar />
     </Box>
   );
 }
