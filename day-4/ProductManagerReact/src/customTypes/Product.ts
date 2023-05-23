@@ -4,4 +4,5 @@ export interface Product {
   type: string;
   place: string;
   warranty: number;
+  imageUrl: string;
 }

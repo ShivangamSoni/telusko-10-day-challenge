@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
@@ -13,22 +14,28 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Image,
   Input,
 } from '@chakra-ui/react';
 
 import { Product } from '@customTypes/Product';
 import addProduct from '@api/addProduct';
-import { useNavigate } from 'react-router-dom';
+
+import UnSplashImagePickerModal from 'unsplash-image-picker';
+import 'unsplash-image-picker/dist/index.css';
+import { useState } from 'react';
 
 const FormSchema = object({
   name: string().required("Name, can't be empty"),
   type: string().required("Type, can't be empty"),
   place: string().required("Place, can't be empty"),
   warranty: number().required("Warranty, can't be empty"),
+  imageUrl: string().required('Please select an Image'),
 });
 type FormState = InferType<typeof FormSchema>;
 
 export default function AddNew() {
+  const [imagePicker, setImagePicker] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation<
@@ -45,6 +52,8 @@ export default function AddNew() {
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<FormState>({
     resolver: yupResolver(FormSchema),
@@ -55,8 +64,12 @@ export default function AddNew() {
     navigate('/');
   }
 
+  const imageUrl = getValues('imageUrl');
+
+  console.log(import.meta.env);
+
   return (
-    <Center>
+    <Center pb={10}>
       <Box
         as="form"
         onSubmit={handleSubmit(submitHandler)}
@@ -65,6 +78,27 @@ export default function AddNew() {
         rounded={'lg'}
         w={'min(500px, 95%)'}
       >
+        <FormControl
+          isInvalid={errors.warranty != null}
+          mb={4}
+          display={'flex'}
+          flexDirection={'column'}
+          gap={2}
+        >
+          <FormLabel>Product Image</FormLabel>
+          <Image
+            src={imageUrl}
+            fallbackSrc="https://via.placeholder.com/300"
+            rounded={'lg'}
+            height={230}
+            width={282}
+            objectFit={'cover'}
+            alignSelf={'center'}
+          />
+          <Button onClick={() => setImagePicker(true)}>Select an Image</Button>
+          <FormErrorMessage>{errors.imageUrl?.message}</FormErrorMessage>
+        </FormControl>
+
         <FormControl isInvalid={errors.name != null} mb={4}>
           <FormLabel>Name</FormLabel>
           <Input {...register('name')} type="text" />
@@ -95,6 +129,16 @@ export default function AddNew() {
           </Button>
         </Flex>
       </Box>
+
+      <UnSplashImagePickerModal
+        unsplashAccessKey={import.meta.env.VITE_UNSPLASH_ACCESSKEY}
+        onPhotoSelect={(photo) => {
+          setValue('imageUrl', photo.urls.small);
+          setImagePicker(false);
+        }}
+        active={imagePicker}
+        setActive={setImagePicker}
+      />
     </Center>
   );
 }

@@ -14,7 +14,7 @@ import {
 
 import { Product } from '@customTypes/Product';
 
-const IMAGE =
+const FALLBACK_IMAGE =
   'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function ProductDetailsCard({
-  product: { id, name, place, type, warranty },
+  product: { id, name, place, type, warranty, imageUrl },
   onDelete,
 }: Props) {
   const isExpired = warranty < new Date().getFullYear();
@@ -55,7 +55,7 @@ export default function ProductDetailsCard({
             pos: 'absolute',
             top: 5,
             left: 0,
-            backgroundImage: `url(${IMAGE})`,
+            backgroundImage: `url(${imageUrl || FALLBACK_IMAGE})`,
             filter: 'blur(15px)',
             zIndex: -1,
           }}
@@ -73,7 +73,7 @@ export default function ProductDetailsCard({
             height={230}
             width={282}
             objectFit={'cover'}
-            src={IMAGE}
+            src={imageUrl || FALLBACK_IMAGE}
           />
         </Box>
         <Stack pt={10} align={'center'}>

@@ -18,6 +18,7 @@ public class Product {
     private String name;
     private String type;
     private String place;
+    private String imageUrl;
     private int warranty;
 
     public Product(String name, String type, String place, int warranty) {
