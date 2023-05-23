@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function ProductListingCard({
-  product: { name, place, type, warranty },
+  product: { id, name, place, type, warranty },
 }: Props) {
   const isExpired = warranty < new Date().getFullYear();
 
@@ -42,7 +42,7 @@ export default function ProductListingCard({
         </Link>
         <Stack direction={'row'} align={'center'}>
           <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-            <Link to={`/products/${name}`}>{name}</Link>
+            <Link to={`/products/${id}`}>{name}</Link>
           </Heading>
           {/* TODO: OnClick Search for Type */}
           <Badge

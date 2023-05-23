@@ -1,12 +1,29 @@
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+
+import { Product } from '@customTypes/Product';
+import getProductById from '@api/getProductById';
+
 import ProductDetailsCard from '@features/common/ProductDetailsCard';
 
-import MockupData from '@data/mockProducts.json';
-
 export default function ProductDetails() {
+  const { id } = useParams();
+
+  const { data, isLoading, isFetching, isRefetching } = useQuery<
+    Product,
+    AxiosError
+  >({
+    queryKey: ['product', id],
+    queryFn: () => getProductById({ id: id as string }),
+  });
+
+  if (isLoading || isFetching || isRefetching) {
+    // TODO: Add a Proper loading Indicator
+    return <>Loading...</>;
+  }
+
   return (
-    <ProductDetailsCard
-      product={MockupData[0]}
-      onDelete={(id) => console.log(id)}
-    />
+    <ProductDetailsCard product={data!} onDelete={(id) => console.log(id)} />
   );
 }
