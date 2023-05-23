@@ -6,16 +6,20 @@ import Header from './Header';
 
 export default function RootLayout() {
   return (
-    <Box
-      bg={useColorModeValue('facebook.100', 'facebook.800')}
-      minH="100vh"
-      py="10"
-    >
-      <Container maxW="container.xl" w="92%" p="0">
+    <Box bg={useColorModeValue('facebook.100', 'facebook.800')}>
+      <Container
+        maxW="container.xl"
+        minH="100vh"
+        py="5"
+        px="0"
+        w="92%"
+        display={'grid'}
+        gridTemplateRows={'auto 1fr'}
+      >
         <Header />
-        <main>
+        <Box as="main">
           <Outlet />
-        </main>
+        </Box>
       </Container>
     </Box>
   );
