@@ -6,6 +6,7 @@ import Expired from './Expired';
 import ProductDetails from './ProductDetails';
 import Search from './Search';
 import Place from './Place';
+import AddNew from './AddNew';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: '/products/add',
+        element: <AddNew />,
       },
       {
         path: '/products/expired',
