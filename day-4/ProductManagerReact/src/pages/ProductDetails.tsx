@@ -1,14 +1,17 @@
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import { Product } from '@customTypes/Product';
 import getProductById from '@api/getProductById';
 
 import ProductDetailsCard from '@features/common/ProductDetailsCard';
+import deleteProduct from '@api/deleteProduct';
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isFetching, isRefetching, error } = useQuery<
     Product,
@@ -29,12 +32,32 @@ export default function ProductDetails() {
       query.isActive() && error?.response?.status !== 404,
   });
 
+  const { mutateAsync } = useMutation<
+    { message: string },
+    AxiosError,
+    Product['id']
+  >({
+    mutationFn: (id) => deleteProduct(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['products']);
+      navigate(-1);
+    },
+  });
+
   if (isLoading || isFetching || isRefetching) {
     // TODO: Add a Proper loading Indicator
     return <>Loading...</>;
   }
 
+  console.log(data);
+
   return (
-    <ProductDetailsCard product={data!} onDelete={(id) => console.log(id)} />
+    <>
+      {data && data != null ? (
+        <ProductDetailsCard product={data} onDelete={(id) => mutateAsync(id)} />
+      ) : (
+        <Navigate to={'/404'} />
+      )}
+    </>
   );
 }
