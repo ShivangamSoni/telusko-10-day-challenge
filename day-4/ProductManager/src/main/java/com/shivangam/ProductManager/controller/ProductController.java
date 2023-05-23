@@ -42,6 +42,14 @@ public class ProductController {
         return service.getProductById(id);
     }
 
+    @DeleteMapping("/product/{id}")
+    public @ResponseBody ResponseEntity<Map<String, Object>> deleteProductById(@PathVariable int id) {
+        service.deleteProductById(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Product Deleted Successfully");
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/product")
     public @ResponseBody ResponseEntity<Map<String, Object>> addProduct(@RequestBody Product p) {
         service.addProduct(p);

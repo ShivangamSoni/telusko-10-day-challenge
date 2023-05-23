@@ -31,6 +31,10 @@ public class ProductService {
         return repository.findById(id).orElse(null);
     }
 
+    public void deleteProductById(int id) {
+        repository.deleteById(id);
+    }
+
     public Page<Product> getProductsWithText(String text, Pageable pageable) {
         return repository.findAllByText(text, pageable);
     }
