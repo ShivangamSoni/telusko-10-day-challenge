@@ -23,8 +23,8 @@ what's done during Session.
 
 ### Code
 
-[Back-End](./ProductManager/src/main/java/com/shivangam/ProductManager/)
-[Front-End](./ProductManagerReact/)
+- [Back-End](./ProductManager/src/main/java/com/shivangam/ProductManager/)
+- [Front-End](./ProductManagerReact/)
 
 ## My Process
 
