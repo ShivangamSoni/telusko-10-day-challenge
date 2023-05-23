@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
@@ -8,13 +7,15 @@ import { Box, Grid, Heading, Text } from '@chakra-ui/react';
 import { ProductResponse } from '@customTypes/ProductResponse';
 import getProductsByPlace from '@api/getProductsByPlace';
 
+import usePagination from '@hooks/usePagination';
+
 import ProductList from '@features/common/ProductList';
 import Pagination from '@features/common/Pagination';
 
 export default function Place() {
   const { place } = useParams();
 
-  const [page, setPage] = useState(0);
+  const { page, onNext, onPrev, onPageSelect } = usePagination(0);
   const { data, isLoading, isFetching, isRefetching, error } = useQuery<
     ProductResponse,
     AxiosError
@@ -33,30 +34,6 @@ export default function Place() {
     refetchOnReconnect: (query): boolean =>
       query.isActive() && error?.response?.status !== 404,
   });
-
-  function onNext() {
-    setPage((prev) => {
-      const next = prev + 1;
-      if (data!.totalPages >= next) {
-        return data!.totalPages - 1;
-      }
-      return next;
-    });
-  }
-
-  function onPrev() {
-    setPage((prev) => {
-      const next = prev - 1;
-      if (next < 0) {
-        return 0;
-      }
-      return next;
-    });
-  }
-
-  function onPageSelect(newPage: number) {
-    setPage(newPage);
-  }
 
   if (isLoading || isFetching || isRefetching) {
     // TODO: Add a Proper loading Indicator
@@ -78,7 +55,7 @@ export default function Place() {
             <Pagination
               totalPages={data.totalPages}
               currentPage={page}
-              onNext={onNext}
+              onNext={() => onNext(data.totalPages)}
               onPrev={onPrev}
               onPageSelect={onPageSelect}
             />
