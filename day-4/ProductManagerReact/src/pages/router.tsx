@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from '@features/site/RootLayout';
 import Home from './Home';
@@ -7,12 +7,12 @@ import ProductDetails from './ProductDetails';
 import Search from './Search';
 import Place from './Place';
 import AddNew from './AddNew';
+import NotFound from './NotFound';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
-    errorElement: <>Error</>,
     children: [
       {
         index: true,
@@ -37,6 +37,14 @@ export const router = createBrowserRouter([
       {
         path: '/products/place/:place',
         element: <Place />,
+      },
+      {
+        path: '/404',
+        element: <NotFound />,
+      },
+      {
+        path: '*',
+        element: <Navigate to="/404" />,
       },
     ],
   },
