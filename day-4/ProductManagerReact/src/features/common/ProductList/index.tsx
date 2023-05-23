@@ -4,7 +4,13 @@ import { Product } from '@customTypes/Product';
 
 import ProductListingCard from '../ProductListingCard';
 
-export default function ProductList({ products }: { products: Product[] }) {
+export default function ProductList({
+  products,
+  highlight,
+}: {
+  products: Product[];
+  highlight?: string;
+}) {
   return (
     <Flex direction="column" justifyContent="center">
       <Grid
@@ -13,7 +19,11 @@ export default function ProductList({ products }: { products: Product[] }) {
         gridTemplateColumns="repeat( auto-fit, minmax(280px, 1fr) )"
       >
         {products.map((product) => (
-          <ProductListingCard key={product.id} product={product} />
+          <ProductListingCard
+            key={product.id}
+            product={product}
+            highlight={highlight}
+          />
         ))}
       </Grid>
     </Flex>

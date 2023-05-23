@@ -73,7 +73,7 @@ export default function Search() {
       <Heading>Search Term: `{q}`</Heading>
       {data && data.content && data.content.length > 0 ? (
         <>
-          <ProductList products={data.content} />
+          <ProductList products={data.content} highlight={q as string} />
           <Box position={'sticky'} bottom={5} zIndex={100}>
             <Pagination
               totalPages={data.totalPages}
