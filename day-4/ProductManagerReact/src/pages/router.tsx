@@ -5,6 +5,7 @@ import Home from './Home';
 import Expired from './Expired';
 import ProductDetails from './ProductDetails';
 import Search from './Search';
+import Place from './Place';
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: '/products/search',
         element: <Search />,
+      },
+      {
+        path: '/products/place/:place',
+        element: <Place />,
       },
     ],
   },
