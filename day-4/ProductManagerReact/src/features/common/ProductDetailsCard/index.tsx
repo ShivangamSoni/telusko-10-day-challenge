@@ -9,6 +9,7 @@ import {
   Image,
   Badge,
   Button,
+  Center,
 } from '@chakra-ui/react';
 
 import { Product } from '@customTypes/Product';
@@ -28,80 +29,87 @@ export default function ProductDetailsCard({
   const isExpired = warranty < new Date().getFullYear();
 
   return (
-    <Box
-      role={'group'}
-      p={6}
-      w={'full'}
-      bg={useColorModeValue('white', 'gray.800')}
-      boxShadow={'2xl'}
-      rounded={'lg'}
-      pos={'relative'}
-      zIndex={1}
-      mt={5}
-    >
+    <Center>
       <Box
+        role={'group'}
+        p={6}
+        maxW={'280px'}
+        w={'full'}
+        bg={useColorModeValue('white', 'gray.800')}
+        boxShadow={'2xl'}
         rounded={'lg'}
-        mt={-12}
         pos={'relative'}
-        height={'230px'}
-        _after={{
-          transition: 'all .3s ease',
-          content: '""',
-          w: 'full',
-          h: 'full',
-          pos: 'absolute',
-          top: 5,
-          left: 0,
-          backgroundImage: `url(${IMAGE})`,
-          filter: 'blur(15px)',
-          zIndex: -1,
-        }}
-        _groupHover={{
-          _after: {
-            filter: 'blur(20px)',
-          },
-        }}
-        display={'flex'}
-        alignItems={'center'}
-        justifyContent={'center'}
+        zIndex={1}
+        mt={5}
       >
-        <Image
+        <Box
           rounded={'lg'}
-          height={230}
-          width={282}
-          objectFit={'cover'}
-          src={IMAGE}
-        />
-      </Box>
-      <Stack pt={10} align={'center'}>
-        <Link
-          to={`/products/place/${place}`}
-          title={`View All Products at ${place}`}
+          mt={-12}
+          pos={'relative'}
+          height={'230px'}
+          _after={{
+            transition: 'all .3s ease',
+            content: '""',
+            w: 'full',
+            h: 'full',
+            pos: 'absolute',
+            top: 5,
+            left: 0,
+            backgroundImage: `url(${IMAGE})`,
+            filter: 'blur(15px)',
+            zIndex: -1,
+          }}
+          _groupHover={{
+            _after: {
+              filter: 'blur(20px)',
+            },
+          }}
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'center'}
         >
-          <Text color={'gray.500'} fontSize={'md'} textTransform={'uppercase'}>
-            {place}
+          <Image
+            rounded={'lg'}
+            height={230}
+            width={282}
+            objectFit={'cover'}
+            src={IMAGE}
+          />
+        </Box>
+        <Stack pt={10} align={'center'}>
+          <Link
+            to={`/products/place/${place}`}
+            title={`View All Products at ${place}`}
+          >
+            <Text
+              color={'gray.500'}
+              fontSize={'md'}
+              textTransform={'uppercase'}
+            >
+              {place}
+            </Text>
+          </Link>
+          <Stack direction={'row'} align={'center'}>
+            <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
+              {name}
+            </Heading>
+            {/* TODO: OnClick Search for Type */}
+            <Badge colorScheme={isExpired ? 'red' : 'blue'}>{type}</Badge>
+          </Stack>
+          <Text
+            fontSize={'lg'}
+            color={'gray.600'}
+            textDecoration={isExpired ? 'line-through' : ''}
+          >
+            {warranty}
           </Text>
-        </Link>
-        <Stack direction={'row'} align={'center'}>
-          <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-            {name}
-          </Heading>
-          {/* TODO: OnClick Search for Type */}
-          <Badge colorScheme={isExpired ? 'red' : 'blue'}>{type}</Badge>
         </Stack>
-        <Text
-          fontSize={'lg'}
-          color={'gray.600'}
-          textDecoration={isExpired ? 'line-through' : ''}
-        >
-          {warranty}
-        </Text>
-      </Stack>
-      <Stack mt={4}>
-        <Button colorScheme="red" onClick={() => onDelete(id)}>
-          Delete
-        </Button>
-      </Stack>
-    </Box>
+        <Stack mt={4}>
+          <Button colorScheme="red" onClick={() => onDelete(id)}>
+            Delete
+          </Button>
+        </Stack>
+      </Box>
+    </Center>
   );
 }

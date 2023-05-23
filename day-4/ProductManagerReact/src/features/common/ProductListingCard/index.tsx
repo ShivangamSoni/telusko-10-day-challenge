@@ -42,7 +42,7 @@ export default function ProductListingCard({
         </Link>
         <Stack direction={'row'} align={'center'}>
           <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-            {name}
+            <Link to={`/products/${name}`}>{name}</Link>
           </Heading>
           {/* TODO: OnClick Search for Type */}
           <Badge

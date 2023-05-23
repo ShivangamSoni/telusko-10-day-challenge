@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from '@features/site/RootLayout';
 import Home from './Home';
 import Expired from './Expired';
+import ProductDetails from './ProductDetails';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
       {
         path: '/products/expired',
         element: <Expired />,
+      },
+      {
+        path: '/products/:name',
+        element: <ProductDetails />,
       },
     ],
   },
