@@ -1,8 +1,12 @@
 import { Outlet } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { Box, Container, useColorModeValue } from '@chakra-ui/react';
 
 import Header from './Header';
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   return (
@@ -16,10 +20,13 @@ export default function RootLayout() {
         display={'grid'}
         gridTemplateRows={'auto 1fr'}
       >
-        <Header />
-        <Box as="main">
-          <Outlet />
-        </Box>
+        <QueryClientProvider client={queryClient}>
+          <Header />
+          <Box as="main">
+            <Outlet />
+          </Box>
+          <ReactQueryDevtools />
+        </QueryClientProvider>
       </Container>
     </Box>
   );

@@ -42,6 +42,12 @@
       ],
       "@utils/*": [
         "src/utils/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@axios/*": [
+        "src/axios/*"
       ]
     }
   },
