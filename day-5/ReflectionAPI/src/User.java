@@ -1,14 +1,9 @@
-public class User {
+public final class User {
     private int id;
     private String name;
 
     public User() {
-    }
-
-    public User(int id, String name) {
         System.out.println("Object Created");
-        this.id = id;
-        this.name = name;
     }
 
     private String getDetails() {
@@ -17,5 +12,29 @@ public class User {
 
     private String getPrivateDetails(int i, String s) {
         return "Here's what I received: " + i + " " + s;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
