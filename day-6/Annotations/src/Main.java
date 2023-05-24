@@ -1,4 +1,5 @@
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -26,6 +27,20 @@ public class Main {
                         }
                     }
                     System.out.println();
+                }
+            }
+
+            for(Field f : cls.getDeclaredFields()) {
+                if(f.isAnnotationPresent(ImportantString.class) && f.getType().equals(String.class)) {
+                    System.out.println(f.getName() + " is an Important String");
+                    if(!f.canAccess(u1)) {
+                        f.setAccessible(true);
+                    }
+                    try {
+                        System.out.println(f.getName() + " : " + f.get(u1));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

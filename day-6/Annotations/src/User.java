@@ -1,6 +1,7 @@
 @Important
 public class User {
     private int id;
+    @ImportantString
     private String name;
 
     public User(int id, String name) {
