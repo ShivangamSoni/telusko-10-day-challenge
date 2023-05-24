@@ -8,6 +8,16 @@ public class User {
         this.name = name;
     }
 
+    @Execute
+    public void show() {
+        System.out.println("Inside Show");
+    }
+
+    @Execute(times = 3)
+    public void shout() {
+        System.out.println("Inside Shout");
+    }
+
     public int getId() {
         return id;
     }

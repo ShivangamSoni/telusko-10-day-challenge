@@ -1,3 +1,7 @@
+import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class Main {
     public static void main(String[] args) {
         User u1 = new User(1, "Shivi");
@@ -6,7 +10,24 @@ public class Main {
         // Adding functionality for Annotation on Run-Time using Reflection
         Class<?> cls = u1.getClass();
         if(cls.isAnnotationPresent(Important.class)) {
-            System.out.println(cls.getName() + " is an Important Class");
+            System.out.println(cls.getName() + " is an Important Class\n");
+
+            for(Method m : cls.getDeclaredMethods()) {
+                if(m.isAnnotationPresent(Execute.class)) {
+                    Annotation an = m.getAnnotation(Execute.class);
+                    Execute exAn = (Execute) an;
+                    int times = exAn.times();
+                    System.out.println("Executing Method: " + m.getName() + " " + times + " Time(s)");
+                    for(int i = 1; i <= times; i++) {
+                        try {
+                            m.invoke(u1);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    System.out.println();
+                }
+            }
         }
     }
 }
