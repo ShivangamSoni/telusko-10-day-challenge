@@ -17,4 +17,9 @@ public class URLShortenerController {
     public String shortenURL(@RequestBody String originalURL) {
         return urlService.shortenURL(originalURL);
     }
+
+    @GetMapping("/expand")
+    public String expandURL(@RequestBody String shortURL) {
+        return urlService.expandURL(shortURL);
+    }
 }

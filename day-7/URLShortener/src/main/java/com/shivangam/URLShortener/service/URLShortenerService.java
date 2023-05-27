@@ -20,6 +20,15 @@ public class URLShortenerService {
         cache = new HashMap<>();
     }
 
+    public String expandURL(String shortURL) {
+        for(Map.Entry<String, String> entry: cache.entrySet()) {
+            if(entry.getValue().equals(shortURL)) {
+                return entry.getKey();
+            }
+        }
+        return "URL Not Found";
+    }
+
     public String shortenURL(String originalURL) {
         String originalURLWithoutProtocol = removeProtocol(originalURL);
         if(cache.containsKey(originalURLWithoutProtocol)) {
@@ -47,7 +56,11 @@ public class URLShortenerService {
         try {
             URL url = new URL(urlString);
             String protocol = url.getProtocol();
-            return urlString.replace(protocol + "://", "");
+            String noProtocolURL = urlString.replace(protocol + "://", "");
+            if(noProtocolURL.endsWith("/")) {
+                noProtocolURL = noProtocolURL.substring(0, noProtocolURL.length() - 1);
+            }
+            return noProtocolURL;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
