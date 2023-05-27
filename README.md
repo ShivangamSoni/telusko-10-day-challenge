@@ -62,11 +62,15 @@ But in order to Participate in the Giveaway following needs to be done:
 
 ### My Solutions:
 
-| #     | Topic/Concept                                                                | Solution               | Done using |
-| ----- | ---------------------------------------------------------------------------- | ---------------------- | ---------- |
-| Day 1 | Recursion & Memoization                                                      | [My Solution](./day-1) | JavaScript |
-| Day 2 | Product Management App                                                       | [My Solution](./day-2) | Java       |
-| Day 3 | Product Management App with Maven, Spring-Boot, Spring Data JPA & PostgreSQL | [My Solution](./day-3) | Java       |
+| #     | Topic/Concept                                                                | Solution               | Done using        |
+| ----- | ---------------------------------------------------------------------------- | ---------------------- | ----------------- |
+| Day 1 | Recursion & Memoization                                                      | [My Solution](./day-1) | JavaScript        |
+| Day 2 | Product Management App                                                       | [My Solution](./day-2) | Java              |
+| Day 3 | Product Management App with Maven, Spring-Boot, Spring Data JPA & PostgreSQL | [My Solution](./day-3) | Java              |
+| Day 4 | Product Management REST API & React APP                                      | [My Solution](./day-4) | Java & TypeScript |
+| Day 5 | Java Reflection API                                                          | [My Solution](./day-5) | Java              |
+| Day 6 | Java Annotations                                                             | [My Solution](./day-6) | Java              |
+| Day 7 | URL Shortener REST API                                                       | [My Solution](./day-7) | Java              |
 
 ## Author
 

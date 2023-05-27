@@ -19,4 +19,4 @@ Explore Java Annotations
 
 ## Article
 
-[LinkedIn]()
+[LinkedIn](https://www.linkedin.com/pulse/java-annotation-what-why-how-shivangam-soni)
