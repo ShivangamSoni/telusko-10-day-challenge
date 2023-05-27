@@ -8,20 +8,27 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class URLShortenerService {
-    private Random random;
+    private final Map<String, String> cache;
     private static final int SHORT_URL_LENGTH = 6;
 
     public URLShortenerService() {
-        random = new Random();
+        cache = new HashMap<>();
     }
 
     public String shortenURL(String originalURL) {
         String originalURLWithoutProtocol = removeProtocol(originalURL);
-        return "shi.vi/" + generateUniquePart(originalURLWithoutProtocol);
+        if(cache.containsKey(originalURLWithoutProtocol)) {
+            return cache.get(originalURLWithoutProtocol);
+        }
+
+        String shortenedURL =  "shi.vi/" + generateUniquePart(originalURLWithoutProtocol);
+        cache.put(originalURLWithoutProtocol, shortenedURL);
+        return shortenedURL;
     }
 
     private String generateUniquePart(String originalURL) {
