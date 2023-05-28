@@ -21,8 +21,9 @@ public class URLShortenerService {
     }
 
     public String expandURL(String shortURL) {
+        String urlWithoutProtocol = removeProtocol(shortURL);
         for(Map.Entry<String, String> entry: cache.entrySet()) {
-            if(entry.getValue().equals(shortURL)) {
+            if(entry.getValue().equals(urlWithoutProtocol)) {
                 return entry.getKey();
             }
         }
@@ -30,13 +31,13 @@ public class URLShortenerService {
     }
 
     public String shortenURL(String originalURL) {
-        String originalURLWithoutProtocol = removeProtocol(originalURL);
-        if(cache.containsKey(originalURLWithoutProtocol)) {
-            return "https://" + cache.get(originalURLWithoutProtocol);
+        if(cache.containsKey(originalURL)) {
+            return "https://" + cache.get(originalURL);
         }
 
+        String originalURLWithoutProtocol = removeProtocol(originalURL);
         String shortenedURL =  "shi.vi/" + generateUniquePart(originalURLWithoutProtocol);
-        cache.put(originalURLWithoutProtocol, shortenedURL);
+        cache.put(originalURL, shortenedURL);
         return "https://" + shortenedURL;
     }
 
