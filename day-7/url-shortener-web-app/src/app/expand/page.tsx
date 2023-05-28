@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import SearchBar from '@/components/SearchBar';
+import UrlViewSkeleton from '@/components/UrlView/Skeleton';
 import UrlView from '@/components/UrlView';
 
 export default function Home() {
@@ -10,13 +11,17 @@ export default function Home() {
     original: string;
     expandedUrl: string;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
 
   async function expandUrl(url: string) {
+    setData(null);
+    setLoading(true);
     const res = await fetch('/api/expand', {
       method: 'post',
       body: url,
     });
     setData(await res.json());
+    setLoading(false);
   }
 
   return (
@@ -25,7 +30,14 @@ export default function Home() {
         <span>Find the Reality,&nbsp;</span>
         <span>Behind the URL</span>
       </p>
-      <SearchBar label="URL to Expand" onSubmit={(url) => expandUrl(url)} />
+      <SearchBar
+        label="URL to Expand"
+        onSubmit={(url) => expandUrl(url)}
+        isDisabled={loading}
+      />
+
+      {loading && <UrlViewSkeleton />}
+
       {data && (
         <UrlView
           data={{ original: data.original, response: data.expandedUrl }}

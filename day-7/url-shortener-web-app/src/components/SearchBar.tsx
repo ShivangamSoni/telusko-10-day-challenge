@@ -20,9 +20,11 @@ type FormState = InferType<typeof FormSchema>;
 
 export default function SearchBar({
   label,
+  isDisabled,
   onSubmit,
 }: {
   label: string;
+  isDisabled: boolean;
   onSubmit: (url: string) => void;
 }) {
   const {
@@ -71,6 +73,7 @@ export default function SearchBar({
             className="w-full rounded-full pl-8 px-4 py-1 text-sm sm:text-base"
             placeholder="https://www.example.com/"
             {...register('url')}
+            disabled={isDisabled}
           />
           <span className="absolute top-1/2 left-2 -translate-y-1/2 w-4 aspect-square bg-bar-blue rounded-full"></span>
           {errors.url && errors.url.message && (

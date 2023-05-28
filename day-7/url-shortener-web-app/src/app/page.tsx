@@ -1,21 +1,27 @@
 'use client';
 
-import SearchBar from '@/components/SearchBar';
-import UrlView from '@/components/UrlView';
 import { useState } from 'react';
+
+import SearchBar from '@/components/SearchBar';
+import UrlViewSkeleton from '@/components/UrlView/Skeleton';
+import UrlView from '@/components/UrlView';
 
 export default function Home() {
   const [data, setData] = useState<{
     original: string;
     shortUrl: string;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
 
   async function shortenUrl(url: string) {
+    setData(null);
+    setLoading(true);
     const res = await fetch('/api/shorten', {
       method: 'post',
       body: url,
     });
     setData(await res.json());
+    setLoading(false);
   }
 
   return (
@@ -24,7 +30,14 @@ export default function Home() {
         <span>the shorter,&nbsp;</span>
         <span>the better</span>
       </p>
-      <SearchBar label="URL to Shorten" onSubmit={(url) => shortenUrl(url)} />
+      <SearchBar
+        label="URL to Shorten"
+        onSubmit={(url) => shortenUrl(url)}
+        isDisabled={loading}
+      />
+
+      {loading && <UrlViewSkeleton />}
+
       {data && (
         <UrlView
           data={{ original: data.original, response: data.shortUrl }}
