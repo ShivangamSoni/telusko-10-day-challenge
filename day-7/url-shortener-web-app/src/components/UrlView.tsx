@@ -26,26 +26,28 @@ export default function UrlView({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="flex flex-col items-center justify-center gap-4 text-center">
       <span>
         {label.original}: {original}
       </span>
-      <div className="bg-bg-bar px-6 py-3 rounded-full text-lg relative flex items-center gap-[0.5ch]">
-        {label.response}: <span className="font-semibold">{response}</span>
+      <div className="bg-bg-bar px-3 sm:px-6 py-3 rounded-lg sm:rounded-full sm:text-lg pr-10 flex flex-col items-center gap-4">
+        <span>
+          {label.response}: <span className="font-semibold">{response}</span>
+        </span>
         <button
           onClick={copyUrl}
-          className="w-5 aspect-square flex items-center justify-center"
+          className="relative w-5 aspect-square flex items-center justify-center"
         >
           <span className="sr-only">Copy URL</span>
           <Image src={CopyIcon} alt="" />
+          <span
+            className={`absolute left-full top-0 ml-1 text-xs text-primary-blue bg-white px-1 py-0.5 rounded-full transition-transform duration-300 ${
+              copied ? 'scale-100' : 'scale-0'
+            }`}
+          >
+            Copied
+          </span>
         </button>
-        <span
-          className={`absolute left-full top-0 ml-1 text-sm text-primary-blue bg-white px-1 py-0.5 rounded-full transition-transform duration-300 ${
-            copied ? 'scale-100' : 'scale-0'
-          }`}
-        >
-          Copied
-        </span>
       </div>
     </div>
   );

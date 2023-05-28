@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="flex items-center justify-between py-4">
-      <h1 className="tracking-wider text-primary-red text-4xl font-bold">
+      <h1 className="tracking-wider text-primary-red text-2xl sm:text-3xl md:text-4xl font-bold">
         urls
       </h1>
 

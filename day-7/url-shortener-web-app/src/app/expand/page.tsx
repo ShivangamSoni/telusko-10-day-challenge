@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <main className="grid content-center gap-16 py-20">
-      <p className="capitalize text-7xl font-semibold tracking-wider flex flex-col gap-8">
+      <p className="capitalize text-3xl sm:text-5xl md:text-7xl font-semibold tracking-wider flex flex-col gap-2 sm:gap-6 md:gap-8">
         <span>Find the Reality,&nbsp;</span>
         <span>Behind the URL</span>
       </p>
