@@ -25,7 +25,12 @@ export default function Home() {
         <span>the better</span>
       </p>
       <SearchBar label="URL to Shorten" onSubmit={(url) => shortenUrl(url)} />
-      {data && <UrlView data={data} />}
+      {data && (
+        <UrlView
+          data={{ original: data.original, response: data.shortUrl }}
+          label={{ original: 'Original', response: 'Shortened' }}
+        />
+      )}
     </main>
   );
 }

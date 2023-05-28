@@ -5,10 +5,12 @@ import Image from 'next/image';
 
 export default function UrlView({
   data,
+  label,
 }: {
-  data: { original: string; shortUrl: string };
+  data: { original: string; response: string };
+  label: { original: string; response: string };
 }) {
-  const { original, shortUrl } = data;
+  const { original, response } = data;
 
   const [copied, setCopied] = useState(false);
 
@@ -18,16 +20,18 @@ export default function UrlView({
 
   async function copyUrl() {
     if (data && !copied && navigator.clipboard) {
-      await navigator.clipboard.writeText(shortUrl);
+      await navigator.clipboard.writeText(response);
       setCopied(true);
     }
   }
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <span>Original: {original}</span>
+      <span>
+        {label.original}: {original}
+      </span>
       <div className="bg-bg-bar px-6 py-3 rounded-full text-lg relative flex items-center gap-[0.5ch]">
-        Shortened: <span className="font-semibold">{shortUrl}</span>
+        {label.response}: <span className="font-semibold">{response}</span>
         <button
           onClick={copyUrl}
           className="w-5 aspect-square flex items-center justify-center"
