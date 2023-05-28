@@ -32,12 +32,12 @@ public class URLShortenerService {
     public String shortenURL(String originalURL) {
         String originalURLWithoutProtocol = removeProtocol(originalURL);
         if(cache.containsKey(originalURLWithoutProtocol)) {
-            return cache.get(originalURLWithoutProtocol);
+            return "https://" + cache.get(originalURLWithoutProtocol);
         }
 
         String shortenedURL =  "shi.vi/" + generateUniquePart(originalURLWithoutProtocol);
         cache.put(originalURLWithoutProtocol, shortenedURL);
-        return shortenedURL;
+        return "https://" + shortenedURL;
     }
 
     private String generateUniquePart(String originalURL) {
