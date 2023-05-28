@@ -20,13 +20,32 @@ This is my solution to the Day 7 Challenge.
 - Create RESTFul API for the URL Shortener using Spring Boot MVC Project
 - Use the Original URL to generate the Short URL instead of using Random
   Characters
+- Create a Web App Consuming the API
 
 ### Code
 
-- [Back-End]()
+- [Back-End](./URLShortener/)
+- [Front-End](./url-shortener-web-app/)
 
 ## My Process
 
 ### Built With
 
+#### Back-End
+
+- Java
+- Maven
+- Spring-Boot
+- Spring Web
+- Docker
+
+#### Front-End
+
+- TypeScript
+- Next 13 (App Router)
+- TailwindCSS
+
 ## Demo
+
+- [Live Spring API](https://spring-boot-url-shortener.onrender.com/)
+- [Live Web App](https://shivi-url-shortener.vercel.app/)
