@@ -28,4 +28,8 @@ public class TechnologyService {
     public List<TechnologyEntity> getAllTechnologies() {
         return repo.findAll();
     }
+
+    public TechnologyEntity getById(Long id) {
+        return repo.findById(id).orElse(null);
+    }
 }
