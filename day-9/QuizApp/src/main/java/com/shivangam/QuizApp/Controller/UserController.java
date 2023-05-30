@@ -70,16 +70,12 @@ public class UserController {
         return new ResponseEntity<>(questionResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/quiz/{id}/submit")
-    public ResponseEntity<QuestionUserResponseDTO> submitAnswerAndContinue(@PathVariable("id") Long id, @RequestBody AnswerRequestDTO answerRequest, HttpSession session) {
+    @PostMapping("/quiz/submit")
+    public ResponseEntity<QuestionUserResponseDTO> submitAnswerAndContinue(@RequestBody AnswerRequestDTO answerRequest, HttpSession session) {
         QuizEntity currentQuiz = (QuizEntity) session.getAttribute("currentQuiz");
         Integer currentIndex = (Integer) session.getAttribute("currentIndex");
         if(currentQuiz == null || currentIndex == null) {
-            return new ResponseEntity<>(new QuestionUserResponseDTO("You need to Start the Quiz before Submitting Answers", null, null, null), HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        if(!Objects.equals(id, currentQuiz.getId())) {
-            return new ResponseEntity<>(new QuestionUserResponseDTO("Quiz with ID:" + currentQuiz.getId() + " is already in Progress", null, null, null), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new QuestionUserResponseDTO("You need to Start a Quiz before Submitting Answers", null, null, null), HttpStatus.NOT_ACCEPTABLE);
         }
 
         QuestionEntity currentQuestion = currentQuiz.getQuestions().get(currentIndex);
@@ -109,6 +105,14 @@ public class UserController {
         var questionData = new QuestionUserDTO(question.getId(), question.getQuestion(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4(), (long) currentIndex, (long) currentQuiz.getQuestions().size());
         var questionResponse = new QuestionUserResponseDTO("Next Question", false, questionData, null);
         return new ResponseEntity<>(questionResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/quiz/quit")
+    public ResponseEntity<QuestionUserResponseDTO> quitQuiz(HttpSession session) {
+        session.removeAttribute("currentQuiz");
+        session.removeAttribute("currentIndex");
+        session.removeAttribute("answers");
+        return new ResponseEntity<>(new QuestionUserResponseDTO("You Quit the Quiz! No Problem there are plenty More", true, null, null), HttpStatus.OK);
     }
 
     private ScoreDTO calculateScore(QuizEntity quiz, List<AnswerRequestDTO> answers) {

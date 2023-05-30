@@ -53,7 +53,9 @@ public class AdminController {
             response.put("message", "Technology is in use & can't be Deleted");
             return new ResponseEntity<>(response, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        Map<String,String> response = new HashMap<>();
+        response.put("message", "Technology Deleted");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/technology")
