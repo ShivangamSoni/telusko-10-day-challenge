@@ -70,7 +70,7 @@ public class UserController {
         return new ResponseEntity<>(questionResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/quiz/{id}/submit")
+    @PostMapping("/quiz/{id}/submit")
     public ResponseEntity<QuestionUserResponseDTO> submitAnswerAndContinue(@PathVariable("id") Long id, @RequestBody AnswerRequestDTO answerRequest, HttpSession session) {
         QuizEntity currentQuiz = (QuizEntity) session.getAttribute("currentQuiz");
         Integer currentIndex = (Integer) session.getAttribute("currentIndex");
