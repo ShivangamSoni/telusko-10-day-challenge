@@ -2,9 +2,13 @@ package com.shivangam.QuizApp.Controller;
 
 import com.shivangam.QuizApp.DTO.QuestionRequestDTO;
 import com.shivangam.QuizApp.DTO.QuestionResponseDTO;
+import com.shivangam.QuizApp.DTO.QuizAdminResponseDTO;
+import com.shivangam.QuizApp.DTO.QuizRequestDTO;
 import com.shivangam.QuizApp.Entity.QuestionEntity;
+import com.shivangam.QuizApp.Entity.QuizEntity;
 import com.shivangam.QuizApp.Entity.TechnologyEntity;
 import com.shivangam.QuizApp.Service.QuestionService;
+import com.shivangam.QuizApp.Service.QuizService;
 import com.shivangam.QuizApp.Service.TechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,8 @@ public class AdminController {
     public TechnologyService technologyService;
     @Autowired
     public QuestionService questionService;
+    @Autowired
+    public QuizService quizService;
 
     // Technology Endpoints
     @PostMapping("/technology")
@@ -78,7 +84,7 @@ public class AdminController {
         question.setOption3(questionRequest.option3());
         question.setOption4(questionRequest.option4());
 
-        TechnologyEntity technology = technologyService.getById(questionRequest.technology_id());
+        var technology = technologyService.getById(questionRequest.technology_id());
         if(technology == null) {
             return new ResponseEntity<>(new QuestionResponseDTO("Technology with given ID Not Found", null), HttpStatus.NOT_FOUND);
         }
@@ -109,5 +115,59 @@ public class AdminController {
     public ResponseEntity<QuestionEntity> getQuestion(@PathVariable("id") Long id) {
         QuestionEntity ques = questionService.getQuestionById(id);
         return new ResponseEntity<>(ques, HttpStatus.OK);
+    }
+
+    // Quiz Endpoints
+    @PostMapping("/quiz")
+    public ResponseEntity<QuizAdminResponseDTO> createQuiz(@RequestBody QuizRequestDTO quizRequest) {
+        var quiz = new QuizEntity();
+        quiz.setName(quizRequest.name());
+
+        var technology = technologyService.getById(quizRequest.technology_id());
+        if(technology == null) {
+            return new ResponseEntity<>(new QuizAdminResponseDTO("Technology with Given ID Not Found", null), HttpStatus.NOT_FOUND);
+        }
+        quiz.setTechnology(technology);
+
+        var questions = questionService.getAllQuestionsById(quizRequest.question_ids());
+        quiz.setQuestions(questions);
+
+        var createdQuiz = quizService.createQuiz(quiz);
+        return new ResponseEntity<>(new QuizAdminResponseDTO("Quiz Created", createdQuiz), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/quiz/{id}")
+    public ResponseEntity<QuizAdminResponseDTO> updateQuiz(@PathVariable("id") Long id, @RequestBody QuizRequestDTO quizRequest) {
+        var quiz = new QuizEntity();
+        quiz.setName(quizRequest.name());
+
+        var technology = technologyService.getById(quizRequest.technology_id());
+        if(technology == null) {
+            return new ResponseEntity<>(new QuizAdminResponseDTO("Technology with Given ID Not Found", null), HttpStatus.NOT_FOUND);
+        }
+        quiz.setTechnology(technology);
+
+        var questions = questionService.getAllQuestionsById(quizRequest.question_ids());
+        quiz.setQuestions(questions);
+
+        var updatedQuiz = quizService.updateQuiz(id, quiz);
+        return new ResponseEntity<>(new QuizAdminResponseDTO("Quiz Updated", updatedQuiz), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/quiz/{id}")
+    public ResponseEntity<QuizAdminResponseDTO> deleteQuiz(@PathVariable("id") Long id) {
+        quizService.deleteById(id);
+        return new ResponseEntity<>(new QuizAdminResponseDTO("Deleted Quiz", null), HttpStatus.OK);
+    }
+
+    @GetMapping("/quiz")
+    public ResponseEntity<List<QuizEntity>> getAllQuizzes(@RequestParam(required = false) Long technologyId) {
+        List<QuizEntity> quizzes;
+        if(technologyId != null) {
+            quizzes = quizService.getAllQuizByTechnologyId(technologyId);
+        } else {
+            quizzes = quizService.getAllQuiz();
+        }
+        return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
 }

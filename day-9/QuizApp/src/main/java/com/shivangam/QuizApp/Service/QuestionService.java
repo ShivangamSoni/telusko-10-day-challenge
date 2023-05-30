@@ -33,6 +33,10 @@ public class QuestionService {
         return repo.findAllQuestionByTechnologyId(technologyId);
     }
 
+    public List<QuestionEntity> getAllQuestionsById(List<Long> ids) {
+        return repo.findAllById(ids);
+    }
+
     public QuestionEntity getQuestionById(Long id) {
         return repo.findById(id).orElse(null);
     }
