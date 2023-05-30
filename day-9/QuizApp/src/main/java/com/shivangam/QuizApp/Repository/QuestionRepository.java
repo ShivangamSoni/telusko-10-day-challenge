@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> {
+    public List<QuestionEntity> findAllQuestionByTechnologyId(Long technologyId);
 }
