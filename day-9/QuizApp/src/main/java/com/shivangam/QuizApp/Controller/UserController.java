@@ -47,7 +47,7 @@ public class UserController {
         return new ResponseEntity<>(quizData, HttpStatus.OK);
     }
 
-    @GetMapping("/quiz/{id}/start")
+    @PostMapping("/quiz/{id}/start")
     public ResponseEntity<QuestionUserResponseDTO> startQuiz(@PathVariable("id") Long id, HttpSession session) {
         var quiz = quizService.getById(id);
         if(quiz == null) {
@@ -65,7 +65,7 @@ public class UserController {
         session.setAttribute("currentIndex", currentIndex);
 
         var question = quiz.getQuestions().get(currentIndex);
-        var questionData = new QuestionUserDTO(question.getId(), question.getQuestion(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4());
+        var questionData = new QuestionUserDTO(question.getId(), question.getQuestion(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4(), (long) currentIndex, (long) quiz.getQuestions().size());
         var questionResponse = new QuestionUserResponseDTO("Quiz Started", false, questionData, null);
         return new ResponseEntity<>(questionResponse, HttpStatus.OK);
     }
@@ -106,7 +106,7 @@ public class UserController {
         currentIndex++;
         session.setAttribute("currentIndex", currentIndex);
         var question = currentQuiz.getQuestions().get(currentIndex);
-        var questionData = new QuestionUserDTO(question.getId(), question.getQuestion(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4());
+        var questionData = new QuestionUserDTO(question.getId(), question.getQuestion(), question.getOption1(), question.getOption2(), question.getOption3(), question.getOption4(), (long) currentIndex, (long) currentQuiz.getQuestions().size());
         var questionResponse = new QuestionUserResponseDTO("Next Question", false, questionData, null);
         return new ResponseEntity<>(questionResponse, HttpStatus.OK);
     }
