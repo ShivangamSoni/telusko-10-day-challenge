@@ -9,6 +9,7 @@ This is my solution to the Day 9 Challenge.
   - [Code](#code)
 - [My Process](#my-process)
   - [Built with](#built-with)
+  - [Demo](#demo)
 
 ## Overview
 
@@ -25,6 +26,51 @@ This is my solution to the Day 9 Challenge.
 
 ### Code
 
-## My Process
+- [Backend](./QuizApp/)
+- [Frontend](./quiz-app-react/)
 
-### Built With
+#### Back-End
+
+- Java
+- Maven
+- Spring-Boot
+- Spring Web
+- Spring Data JPA
+- PostgreSQL
+
+#### Front-End
+
+- Vite
+- TypeScript
+- React
+- @tanstack/react-query
+- react-router-dom
+- Ant Design
+
+## Demo
+
+### Backend
+
+- Update DB details in `application.properties`
+- Update Front End URL for CORS Config in `Config/CorsConfig.class`
+- Start the Spring-Boot App (App will automatically create Tables)
+
+### Front-End
+
+- Install Dependencies
+
+```bash
+$ pnpm i
+```
+
+- Build the project
+
+```bash
+$ pnpm build
+```
+
+- Serve the project
+
+```bash
+$ pnpx serve dist/
+```
