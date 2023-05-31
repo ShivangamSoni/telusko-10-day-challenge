@@ -4,6 +4,7 @@ import RootLayout from '../layout/RootLayout';
 import AdminLayout from '../layout/AdminLayout';
 
 import TechnologyPage from './Admin/TechnologyPage';
+import QuestionPage from './Admin/QuestionPage';
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'question',
-            element: <h1>Question</h1>,
+            element: <QuestionPage />,
           },
           {
             path: 'quiz',
