@@ -3,6 +3,8 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import RootLayout from '../layout/RootLayout';
 import AdminLayout from '../layout/AdminLayout';
 
+import TechnologyPage from './Admin/TechnologyPage';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -22,7 +24,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'technology',
-            element: <h1>Technology</h1>,
+            element: <TechnologyPage />,
           },
           {
             path: 'question',
