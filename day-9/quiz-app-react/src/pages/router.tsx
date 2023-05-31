@@ -1,5 +1,7 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
+
 import RootLayout from '../layout/RootLayout';
+import AdminLayout from '../layout/AdminLayout';
 
 export const router = createBrowserRouter([
   {
@@ -9,6 +11,28 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <h1>Home Page</h1>,
+      },
+      {
+        path: 'admin',
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to={'/admin/technology'} replace />,
+          },
+          {
+            path: 'technology',
+            element: <h1>Technology</h1>,
+          },
+          {
+            path: 'question',
+            element: <h1>Question</h1>,
+          },
+          {
+            path: 'quiz',
+            element: <h1>Course</h1>,
+          },
+        ],
       },
     ],
   },
