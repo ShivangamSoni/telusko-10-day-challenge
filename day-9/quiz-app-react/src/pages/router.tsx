@@ -6,6 +6,7 @@ import AdminLayout from '../layout/AdminLayout';
 import TechnologyPage from './Admin/TechnologyPage';
 import QuestionPage from './Admin/QuestionPage';
 import QuizPage from './Admin/QuizPage';
+import PlayQuiz from './user/PlayQuiz';
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Home Page</h1>,
+        element: <PlayQuiz />,
       },
       {
         path: 'admin',
