@@ -5,6 +5,7 @@ import AdminLayout from '../layout/AdminLayout';
 
 import TechnologyPage from './Admin/TechnologyPage';
 import QuestionPage from './Admin/QuestionPage';
+import QuizPage from './Admin/QuizPage';
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'quiz',
-            element: <h1>Course</h1>,
+            element: <QuizPage />,
           },
         ],
       },
